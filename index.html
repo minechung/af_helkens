@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="./static/img/favicon.ico">
+    <title>Jili</title>
+
+    <script src="./static/js/compatibility.js"></script>
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: #201742;
+    }
+
+    .body-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        /* overflow: hidden; */
+    }
+
+    .content {
+        position: relative;
+        /* overflow: hidden; */
+        font-size: 0;
+        text-align: center;
+    }
+
+    .content>img {
+        width: 100%;
+    }
+
+    @media all and (min-width:1200px) {
+        .content>img {
+            width: 1200px !important;
+        }
+
+        .btn_group>div {
+            width: 260px !important;
+            height: 80px !important;
+            line-height: 80px !important;
+            font-size: 24px !important;
+        }
+    }
+
+
+    .th {
+        display: none
+    }
+
+    .en {
+        display: none;
+    }
+
+    .fixed {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 5.2rem;
+        background: rgba(255, 255, 255, .78);
+        padding: 20px 30px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .fixed>img {
+        height: 100%;
+    }
+
+    .btn_group {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        height: 100%;
+        flex: 1;
+
+    }
+
+    .btn_group>div:nth-child(1) {
+        margin-right: 20px;
+    }
+
+    .btn_group>div {
+        background: url('./static/img/anniu.png');
+        background-size: 100% 100%;
+        width: 8.5rem;
+        height: 3rem;
+        cursor: pointer;
+        line-height: 3rem;
+        text-align: center;
+        color: #fff;
+        margin-right: 10px;
+
+    }
+</style>
+
+<body>
+    <div class="body-content">
+        <div class="content ">
+            <img class="bgsrc" src="" alt="">
+        </div>
+        <div class="fixed">
+            <img src="./static/img/512.png" alt="">
+            <div class="btn_group">
+                <!-- <div class="download1 download zh">Ios 下载</div> -->
+                <div class="download2 download zh">Android 下载</div>
+                <!-- <div class="download1 download en">DOWN IOS</div> -->
+                <div class="download2 download en">DOWN Android</div>
+                <!-- <div class="download1 download th">Ios ดาวน์โหลด</div> -->
+                <div class="download2 download th">Android ดาวน์</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./static/js/jquery.min.js"></script>
+    <script src="./static/js/clipboard.js"></script>
+    <script type="text/javascript">
+        var an = ''
+        var ios = ''
+        // $.get('https://www.8g888.com/index/downloadUrlByPh ', function (res) {
+        //     if (res.code == 200) {
+        //         for(let v of res.data){
+        //             if(v.page_type==2&&v.type==1){
+        //                 an=v.download_url
+        //             }
+        //             if(v.page_type==2&&v.type==2){
+        //                 ios=v.download_url
+        //             }
+        //         }
+
+        //     }
+        // })
+        an = ''
+        ios = ''
+        $('.th').hide()
+        $('.en').show()
+        $('.zh').hide()
+        // $('.bgsrc').attr("src", './static/img/zh.png')
+        $('.bgsrc').attr("src", './static/img/en.png')
+
+        var u = location.search
+        var q = {}
+        location.search.replace(/([^?&=]+)=([^&]+)/g, (_, k, v) => q[k] = v);
+        Object.fromEntries(new URLSearchParams(location.search))
+        u = `u_id=${q.u}`
+        $(document).ready(function () {
+            var u = navigator.userAgent,
+                app = navigator.appVersion;
+
+
+            var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
+            var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+            let url1 = 'https://www.8g888.com/index/showStatisticsj'
+            $.post(url1, {
+                tg: q.tg
+            }, function (result) {
+
+
+            })
+            let url = "https://www.8g888.com/index/statisticsj";
+            $(".download1").click(function () {
+                // $.post(url, {
+                //     tg: q.tg
+                // }, function (result) {
+                //     if (result.code == 200) {
+
+
+                window.location.href = ios;
+
+
+
+                // }
+
+                // })
+            })
+            $(".download2").click(function () {
+                // $.post(url, {
+                //     tg: q.tg
+                // }, function (result) {
+                //     if (result.code == 200) {
+                window.location.href = an;
+
+                //     }
+
+                // })
+            })
+        });
+        var clipboard = new ClipboardJS('.download', {
+            text: function () {
+                return u;
+            }
+        });
+    </script>
+</body>
+
+</html>
